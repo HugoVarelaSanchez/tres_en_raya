@@ -2,7 +2,7 @@ from Tablero import Tablero
 from Usuario import Usuario
  
 def menu_principal(op = int):
-
+ 
     print('''
     (1) Empezar partida
 

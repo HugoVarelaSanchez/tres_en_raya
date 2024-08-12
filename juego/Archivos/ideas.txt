@@ -7,9 +7,6 @@ la movida es guardar Partida ganada, perdida o empatada
 y guardarle resèctp a cada uno de los dos jugadores
 
 
-Imaginemos dos usuarios jugando, Hugo y Juan
-Si Hugo gana, en el main, se hace ganador = copy.copy(Hugo)
-perdedor = copy.copy(Juan)
 
 
 Añadir pregunta de cuantas partidas quiere ver, y

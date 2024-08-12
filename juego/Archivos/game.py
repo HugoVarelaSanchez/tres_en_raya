@@ -1,7 +1,7 @@
 from Tablero import Tablero
 from Usuario import Usuario
 from bases import  Base
-
+from colorama import Fore, Style
 
 def main() :      
    
@@ -30,9 +30,16 @@ def main() :
     #A.register('uno', 'salmon')
     #A.register('cero', 'password')
     a.win_temp = False
+    #A.guardado(a, b, tab)
+    a.ficha = 'x'
+    b.ficha = 'o'
+
+    tab.tablero = [['x', 'o', 'o'], ['x', 'x', 'o'], ['x', 'o', ' ']]
+    print(tab)
+    if tab.comproba_ganador(a, b):
+        print('va')
+    print(tab)
     A.guardado(a, b, tab)
-
-
     A.mostrar_partidas(a, tab)
 
     A.close_sesion(a, tab)

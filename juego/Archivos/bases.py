@@ -1,5 +1,6 @@
 from Usuario import Usuario
 from Tablero import Tablero
+from exception import  number_not_in_menu
 import os
 
 class Base:
@@ -155,7 +156,6 @@ class Base:
     def close_sesion(self, Usuario:Usuario, tablero:Tablero):
 
         tablero.usuarios_activos.remove(Usuario.name)
-        # Ruta relativa a la carpeta 'archivos_usuarios' dentro del proyecto
 
         archivo_path = f'../archivos_usuarios/{Usuario.name}/{Usuario.name}_sesion.txt'
         archivo_absoluto = os.path.abspath(os.path.join(os.path.dirname(__file__), archivo_path))
@@ -176,9 +176,7 @@ class Base:
     '''
     def generar_archivo_guardado(self, user):
 
-        #Sacamos la ruta donde nos encontramos y la usamos de directorio base
         directorio_base = os.path.dirname(os.path.abspath(__file__))
-        #Ubicacion del nuevo directorio
         directorio = os.path.join(directorio_base, '../archivos_usuarios', user)
         
 
@@ -341,7 +339,22 @@ Error Error Error Error
 
                 count += 1
 
-        
-        for partida in lista_partidas:
-            print(f'''\n{partida[0]}\n{partida[1]}\n{Tablero(partida[2])}\n''')
+        while True:
+            try:
+                num_partidas = int(input(f'Cuantas ultimas partidas quieres ver? (max {len(lista_partidas)}): '))
 
+                if num_partidas<1 or num_partidas>len(lista_partidas):
+                    raise number_not_in_menu
+                break
+
+            except ValueError:
+                print('\nDebes introducir un numero\n')
+            except number_not_in_menu:
+                print(f'Debes introducir el numero de partidas registradas que quieres ver: {len(lista_partidas)}')
+
+        lista_partidas = lista_partidas[::-1]
+        
+        for i in range(0, num_partidas):
+            
+            print(f'''\n{lista_partidas[i][0]}\n{lista_partidas[i][1]}\n{Tablero(lista_partidas[i][2])}\n''')
+        

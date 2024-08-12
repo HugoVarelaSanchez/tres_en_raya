@@ -1,6 +1,6 @@
-from Tablero import Tablero
-class Usuario:
 
+class Usuario:
+ 
     def __init__(self, name:str, win_temp:bool, ficha:str, plays:int, plays_win:int, plays_lose:int) -> None:
         
         self.name = name                #Nombre de Usuario

@@ -160,3 +160,21 @@ n n n n n n n n n
 Partida empatada
 tres str uno str
 n n n n n n n n n
+Partida empatada
+tres str uno str
+n n n n n n n n n
+Partida empatada
+tres str uno str
+n n n n n n n n n
+Partida empatada
+tres o uno x
+[31mx[0m o o [31mx[0m x o [31mx[0m o n
+Partida empatada
+tres o uno x
+[31mx[0m o o [31mx[0m x o [31mx[0m o n
+Partida empatada
+tres o uno x
+[31mx[0m o o [31mx[0m x o [31mx[0m o n
+Partida empatada
+tres o uno x
+[31mx[0m o o [31mx[0m x o [31mx[0m o n
