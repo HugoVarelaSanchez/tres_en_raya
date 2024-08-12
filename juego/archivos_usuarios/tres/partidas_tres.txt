@@ -1,0 +1,162 @@
+Ganador uno
+uno: str  vs  tres: str
+[[' ', ' ', ' '], [' ', ' ', ' '], [' ', ' ', ' ']]
+Ganador uno
+uno: str  vs  tres: str
+[[' ', ' ', ' '], [' ', ' ', ' '], [' ', ' ', ' ']]
+Empate
+uno str tres str
+[[' ', ' ', ' '], [' ', ' ', ' '], [' ', ' ', ' ']]
+Empate
+uno str tres str
+[[' ', ' ', ' '], [' ', ' ', ' '], [' ', ' ', ' ']]
+Empate
+uno str tres str
+[[' ', ' ', ' '], [' ', ' ', ' '], [' ', ' ', ' ']]
+Empate
+uno str tres str
+[[' ', ' ', ' '], [' ', ' ', ' '], [' ', ' ', ' ']]
+Empate
+uno str tres str
+[[' ', ' ', ' '], [' ', ' ', ' '], [' ', ' ', ' ']]
+Empate
+uno str tres str
+[[' ', ' ', ' '], [' ', ' ', ' '], [' ', ' ', ' ']]
+Empate
+uno str tres str
+[[' ', ' ', ' '], [' ', ' ', ' '], [' ', ' ', ' ']]
+Empate
+uno str tres str
+[[' ', ' ', ' '], [' ', ' ', ' '], [' ', ' ', ' ']]
+Empate
+uno str tres str
+[[' ', ' ', ' '], [' ', ' ', ' '], [' ', ' ', ' ']]
+Empate
+uno str tres str
+[[' ', ' ', ' '], [' ', ' ', ' '], [' ', ' ', ' ']]
+Empate
+uno str tres str
+[[' ', ' ', ' '], [' ', ' ', ' '], [' ', ' ', ' ']]
+Empate
+uno str tres str
+[[' ', ' ', ' '], [' ', ' ', ' '], [' ', ' ', ' ']]
+Empate
+uno str tres str
+[[' ', ' ', ' '], [' ', ' ', ' '], [' ', ' ', ' ']]
+Empate
+uno str tres str
+[[' ', ' ', ' '], [' ', ' ', ' '], [' ', ' ', ' ']]
+Empate
+uno str tres str
+[[' ', ' ', ' '], [' ', ' ', ' '], [' ', ' ', ' ']]
+Empate
+uno str tres str
+[[' ', ' ', ' '], [' ', ' ', ' '], [' ', ' ', ' ']]
+Empate
+uno str tres str
+[[' ', ' ', ' '], [' ', ' ', ' '], [' ', ' ', ' ']]
+Empate
+uno str tres str
+[[' ', ' ', ' '], [' ', ' ', ' '], [' ', ' ', ' ']]
+Empate
+uno str tres str
+                 
+Empate
+uno str tres str
+                 
+Empate
+uno str tres str
+                 
+Empate
+uno str tres str
+                 
+Empate
+uno str tres str
+                 
+Empate
+uno str tres str
+                 
+Empate
+uno str tres str
+                 
+Empate
+uno str tres str
+                 
+Empate
+uno str tres str
+                 
+Empate
+uno str tres str
+                 
+Empate
+uno str tres str
+                 
+Empate
+uno str tres str
+                 
+Empate
+uno str tres str
+                 
+Empate
+uno str tres str
+                 
+Empate
+uno str tres str
+                 
+Empate
+uno str tres str
+                 
+Empate
+uno str tres str
+                 
+Empate
+uno str tres str
+                 
+Empate
+uno str tres str
+                 
+Empate
+uno str tres str
+n n n n n n n n n
+Empate
+uno str tres str
+n n n n n n n n n
+Empate
+uno str tres str
+n n n n n n n n n
+Empate
+uno str tres str
+n n n n n n n n n
+Empate
+uno str tres str
+n n n n n n n n n
+Empate
+uno str tres str
+n n n n n n n n n
+Empate
+uno str tres str
+n n n n n n n n n
+Partida empatada
+tres str uno str
+n n n n n n n n n
+Partida empatada
+tres str uno str
+n n n n n n n n n
+Partida empatada
+tres str uno str
+n n n n n n n n n
+Partida empatada
+tres str uno str
+n n n n n n n n n
+Partida empatada
+tres str uno str
+n n n n n n n n n
+Partida empatada
+tres str uno str
+n n n n n n n n n
+Partida empatada
+tres str uno str
+n n n n n n n n n
+Partida empatada
+tres str uno str
+n n n n n n n n n

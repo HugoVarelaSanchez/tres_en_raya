@@ -1,0 +1,24 @@
+Partida empatada
+uno x tres o
+n n n n n n n n n
+Partida empatada
+uno x tres o
+n n n n n n n n n
+Partida empatada
+uno x tres o
+n n n n n n n n n
+Partida empatada
+uno x tres o
+n n n n n n n n n
+Partida empatada
+uno str tres str
+n n n n n n n n n
+Partida empatada
+uno str tres str
+n n n n o n n n x
+Partida empatada
+uno str tres str
+n n n n n n n n n
+Partida empatada
+uno str tres str
+n n n n n n n n n

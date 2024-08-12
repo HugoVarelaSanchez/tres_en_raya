@@ -1,0 +1,4 @@
+Hola, mundo
+clave, valor
+España, Madrid
+Salmon, ahumado

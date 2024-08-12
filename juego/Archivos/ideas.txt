@@ -1,0 +1,21 @@
+Hacer otra base de datos donde almaceno las partidas ya jugadas, y se guarda ambas personas, el que gane
+con un corona, y el tablero abajo, tambien cada persona con la ficha
+
+
+Terminar lineas 218 en adelante
+la movida es guardar Partida ganada, perdida o empatada
+y guardarle resèctp a cada uno de los dos jugadores
+
+
+Imaginemos dos usuarios jugando, Hugo y Juan
+Si Hugo gana, en el main, se hace ganador = copy.copy(Hugo)
+perdedor = copy.copy(Juan)
+
+
+Añadir pregunta de cuantas partidas quiere ver, y
+mostrar mensaje de f'Mostrando las {numero} ultimas partidas'
+obviamente mostrando antes el numero de partidas registradas
+y, ademas, saltando un error si metes un numero no vasido
+
+
+Implementar curses (final)
