@@ -1,6 +1,7 @@
 from Usuario import Usuario
 from Tablero import Tablero
 from exception import  number_not_in_menu
+from colorama import Fore, Style
 import os
 
 class Base:
@@ -79,7 +80,7 @@ class Base:
 
 
 
-
+    #Añadir mensaje, comparar si no se ejecuta el primer if, por si es porque no esta en la database, o si esta activo
     '''
     ╔══╗╔╗ ╔╗╔══╗╔══╗╔══╗╔══╗╔═══╗   ╔══╗╔═══╗╔══╗╔══╗╔══╗╔╗ ╔╗
     ╚╗╔╝║╚═╝║╚╗╔╝║╔═╝╚╗╔╝║╔╗║║╔═╗║   ║╔═╝║╔══╝║╔═╝╚╗╔╝║╔╗║║╚═╝║
@@ -90,32 +91,39 @@ class Base:
     '''
     def inicio_sesion(self, nombre, contraseña, tablero:Tablero):
 
-        if self.name_in_database(nombre):
+        #Poner para los que estan activos no poder iniciar sesion de nuevo
 
-            for i in self.archivo:
-                if i[0] == nombre and i[1] == contraseña:
+        if ((self.name_in_database(nombre))):
+            nombre = nombre.lower()
+            if nombre not in tablero.usuarios_activos:
+                for i in self.archivo:
+                    if i[0] == nombre and i[1] == contraseña:
+                        
+                        archivo_path = f'../archivos_usuarios/{nombre}/{nombre}_sesion.txt'
+                        archivo_absoluto = os.path.abspath(os.path.join(os.path.dirname(__file__), archivo_path))
+
+                        with open(archivo_absoluto, 'r') as contenido:
+                            archivo = contenido.read()
                     
-                    archivo_path = f'../archivos_usuarios/{nombre}/{nombre}_sesion.txt'
-                    archivo_absoluto = os.path.abspath(os.path.join(os.path.dirname(__file__), archivo_path))
+                            for line in archivo.split('\n'):
+                                if len(line) != 0:
 
-                    with open(archivo_absoluto, 'r') as contenido:
-                        archivo = contenido.read()
-                
-                        for line in archivo.split('\n'):
-                            if len(line) != 0:
-
-                                partes = line.strip().split()
-                                user = Usuario(partes[0], partes[1], partes[2], partes[3], partes[4], partes[5])
-                                tablero.new_user_online(nombre)
-                            
-
-                    print (f'Usuario {nombre} acaba de iniciar sesion')
-                    return user
-                
-                elif i[0] == nombre and i[1] != contraseña:
-                    print( 'Contraseña incorrecta' )
+                                    partes = line.strip().split()
+                                    user = Usuario(partes[0], bool(partes[1]), partes[2], int(partes[3]), int(partes[4]), int(partes[5]))
+                                    tablero.new_user_online(nombre)
+                                
+                        print (f'\n{Fore.GREEN}Usuario {nombre} acaba de iniciar sesion{Style.RESET_ALL}\n')
+                        return user
+                    
+                    elif i[0] == nombre and i[1] != contraseña:
+                        print(f'\n{Fore.RED}Contraseña incorrecta{Style.RESET_ALL}\n' )
+                        return None
+            else:
+                print(f'\n{Fore.RED}El usuario {nombre} ya se encuentra activo{Style.RESET_ALL}\n')
+            return None
         else:
-            print(f'El usuario {nombre} no se encuentra registrado en la base de datos')
+            print(f'\n{Fore.RED}El usuario {nombre} no se encuentra registrado en la base de datos{Style.RESET_ALL}\n')
+            return None
     '''
     ╔═══╗╔═══╗╔═══╗╔══╗╔══╗╔════╗╔═══╗╔══╗
     ║╔═╗║║╔══╝║╔══╝╚╗╔╝║╔═╝╚═╗╔═╝║╔═╗║║╔╗║
@@ -125,7 +133,7 @@ class Base:
     ╚╝╚╝ ╚═══╝╚═══╝╚══╝╚══╝  ╚╝  ╚╝╚╝ ╚══╝
     '''
     def register(self, nombre, contraseña):
-
+        nombre = nombre.lower()
         if self.name_in_database(nombre):
             print('Ese usuario ya esta registrado en la base de datos')
         
@@ -143,8 +151,12 @@ class Base:
             with open(archivo_absoluto, 'w', encoding='utf-8') as archivo:
                 archivo.write(f'{nombre} bool str 0 0 0')
 
-            print('Usuario registrado con exito')
-        
+            print(f'\n{Fore.GREEN}Usuario registrado con exito{Style.RESET_ALL}')
+
+
+    
+
+
     '''
     ╔══╗╔═══╗╔═══╗╔═══╗╔══╗╔═══╗   ╔══╗╔═══╗╔══╗╔══╗╔══╗╔╗ ╔╗
     ║╔═╝║╔══╝║╔═╗║║╔═╗║║╔╗║║╔═╗║   ║╔═╝║╔══╝║╔═╝╚╗╔╝║╔╗║║╚═╝║
@@ -155,13 +167,19 @@ class Base:
     '''
     def close_sesion(self, Usuario:Usuario, tablero:Tablero):
 
-        tablero.usuarios_activos.remove(Usuario.name)
+        
 
-        archivo_path = f'../archivos_usuarios/{Usuario.name}/{Usuario.name}_sesion.txt'
-        archivo_absoluto = os.path.abspath(os.path.join(os.path.dirname(__file__), archivo_path))
+        if Usuario.name != 'Invitado':
+            
+            tablero.usuarios_activos.remove(Usuario.name)
 
-        with open(archivo_absoluto, 'w', encoding='utf-8') as archivo:
-            archivo.write(f'{Usuario.name} bool str {Usuario.plays} {Usuario.plays_win} {Usuario.plays_lose}')
+            archivo_path = f'../archivos_usuarios/{Usuario.name}/{Usuario.name}_sesion.txt'
+            archivo_absoluto = os.path.abspath(os.path.join(os.path.dirname(__file__), archivo_path))
+
+            with open(archivo_absoluto, 'w', encoding='utf-8') as archivo:
+                archivo.write(f'{Usuario.name} bool str {Usuario.plays} {Usuario.plays_win} {Usuario.plays_lose}')
+
+        print(f'{Fore.GREEN}Usuario {Usuario.name} acaba de cerrar sesion correctamente{Style.RESET_ALL}')
 
         
 
@@ -212,27 +230,13 @@ class Base:
 
 
 
-        #---- Empate ----
-
-        if (user1.win_temp and user2.win_temp) == False:
-
-            #User1
-            save_user_1 = f'''Partida empatada
-{user1.name} {user1.ficha} {user2.name} {user2.ficha}
-{new_tab[0][0]} {new_tab[0][1]} {new_tab[0][2]} {new_tab[1][0]} {new_tab[1][1]} {new_tab[1][2]} {new_tab[2][0]} {new_tab[2][1]} {new_tab[2][2]}\n'''
-
-            #User2
-            save_user_2 = f'''Partida empatada
-{user2.name} {user2.ficha} {user1.name} {user1.ficha}
-{new_tab[0][0]} {new_tab[0][1]} {new_tab[0][2]} {new_tab[1][0]} {new_tab[1][1]} {new_tab[1][2]} {new_tab[2][0]} {new_tab[2][1]} {new_tab[2][2]}\n'''
-
-
+        
 
 
 
         #---- Gana User 1 ----
 
-        elif user1.win_temp == True:
+        if user1.win_temp == True:
             
             #User 1
             save_user_1 = f'''Partida ganada
@@ -261,6 +265,20 @@ class Base:
 {new_tab[0][0]} {new_tab[0][1]} {new_tab[0][2]} {new_tab[1][0]} {new_tab[1][1]} {new_tab[1][2]} {new_tab[2][0]} {new_tab[2][1]} {new_tab[2][2]}\n'''
 
 
+#---- Empate ----
+
+        elif (user1.win_temp and user2.win_temp) == False:
+
+            #User1
+            save_user_1 = f'''Partida empatada
+{user1.name} {user1.ficha} {user2.name} {user2.ficha}
+{new_tab[0][0]} {new_tab[0][1]} {new_tab[0][2]} {new_tab[1][0]} {new_tab[1][1]} {new_tab[1][2]} {new_tab[2][0]} {new_tab[2][1]} {new_tab[2][2]}\n'''
+
+            #User2
+            save_user_2 = f'''Partida empatada
+{user2.name} {user2.ficha} {user1.name} {user1.ficha}
+{new_tab[0][0]} {new_tab[0][1]} {new_tab[0][2]} {new_tab[1][0]} {new_tab[1][1]} {new_tab[1][2]} {new_tab[2][0]} {new_tab[2][1]} {new_tab[2][2]}\n'''
+
 
 
         else:
@@ -279,12 +297,12 @@ Error Error Error Error
 
         
         #Guardado User 2
+        if user2.name != 'Invitado':
+            archivo_path = f'../archivos_usuarios/{user2.name}/partidas_{user2.name}.txt'
+            archivo_absoluto = os.path.abspath(os.path.join(os.path.dirname(__file__), archivo_path))
 
-        archivo_path = f'../archivos_usuarios/{user2.name}/partidas_{user2.name}.txt'
-        archivo_absoluto = os.path.abspath(os.path.join(os.path.dirname(__file__), archivo_path))
-
-        with open(archivo_absoluto, 'a', encoding='utf-8') as archivo:
-            archivo.write(save_user_2)
+            with open(archivo_absoluto, 'a', encoding='utf-8') as archivo:
+                archivo.write(save_user_2)
 
     '''
     ╔╗  ╔╗╔══╗╔══╗╔════╗╔═══╗╔══╗╔═══╗   ╔═══╗╔══╗╔═══╗╔════╗╔══╗╔══╗─╔══╗╔══╗
@@ -295,6 +313,8 @@ Error Error Error Error
     ╚╝  ╚╝╚══╝╚══╝  ╚╝  ╚╝╚╝ ╚╝╚╝╚╝╚╝    ╚╝   ╚╝╚╝╚╝╚╝   ╚╝  ╚══╝╚═══╝╚╝╚╝╚══╝
     '''
     def mostrar_partidas(self, user:Usuario, tab:Tablero):
+
+#Parte 1, obtener datos a representar------------------------------------------------------------
 
 
         archivo_path = f'../archivos_usuarios/{user.name}/partidas_{user.name}.txt'
@@ -339,22 +359,32 @@ Error Error Error Error
 
                 count += 1
 
-        while True:
-            try:
-                num_partidas = int(input(f'Cuantas ultimas partidas quieres ver? (max {len(lista_partidas)}): '))
 
-                if num_partidas<1 or num_partidas>len(lista_partidas):
-                    raise number_not_in_menu
-                break
+#Parte 2, representacion-------------------------------------------------------------------------------------------------------------------
 
-            except ValueError:
-                print('\nDebes introducir un numero\n')
-            except number_not_in_menu:
-                print(f'Debes introducir el numero de partidas registradas que quieres ver: {len(lista_partidas)}')
+        #Obtencion numero partidas a representar
+        if len(lista_partidas) > 0:
+            while True:
 
-        lista_partidas = lista_partidas[::-1]
-        
-        for i in range(0, num_partidas):
+                try:
+                    num_partidas = int(input(f'Cuantas ultimas partidas quieres ver? (max {len(lista_partidas)}): '))
+
+                    if num_partidas<1 or num_partidas>len(lista_partidas):
+                        raise number_not_in_menu
+                    break
+
+                except ValueError:
+                    print(f'\n{Fore.RED}Debes introducir un numero{Style.RESET_ALL}\n')
+                except number_not_in_menu:
+                    print(f'{Fore.RED}Debes introducir el numero de partidas registradas que quieres ver: {len(lista_partidas)}{Style.RESET_ALL}')
             
-            print(f'''\n{lista_partidas[i][0]}\n{lista_partidas[i][1]}\n{Tablero(lista_partidas[i][2])}\n''')
-        
+
+            #Representacion
+            
+            lista_partidas = lista_partidas[::-1]
+            
+            for i in range(0, num_partidas):
+                
+                print(f'''\n{lista_partidas[i][0]}\n{lista_partidas[i][1]}\n{Tablero(lista_partidas[i][2])}\n''')
+        else:
+            print('\nNo se encuentran partidas guardadas para visualizar\n')
