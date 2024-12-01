@@ -1,6 +1,6 @@
 # Tres en Raya en Python
 
-Este es un sencillo juego de **Tres en Raya** (también conocido como "Tic-Tac-Toe") programado en Python. El objetivo es proporcionar una experiencia de juego en la terminal donde dos jugadores compiten por alinear tres de sus símbolos (X u O) en un tablero de 3x3.
+Este es un sencillo juego de **Tres en Raya** programado en Python. 
 
 ---
 
